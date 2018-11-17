@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-12 col-md-8">
+    <main>
+      <section class="articles">
+        <% blog.articles[0...10].each do |article| %>
+        <article class="article box-white box-with-shadow box-rounded">
+          <div class="article-header">
+            <h2><%= link_to article.title, article %></h2>
+          </div>
+
+          <div class="article-content">
+          <%= article.summary %>
+          </div>
+
+          <div class="article-footer">
+            <small class="text-muted">
+              Publicado em <time pubdate="pubdate" datetime="<%= article.date.strftime('%Y-%m-%d') %>">
+                <%= article.date.strftime('%d/%m/%Y') %>
+              </time>
+            </small>
+            <a href="<%= article.url %>" class="float-right">Leia mais</a>
+          </div>
+        </article>
+        <% end %>
+      </section>
+    </main>
+  </div>
+
+  <div class="col-6 col-md-4 col-12">
+    <aside class="profile box-white box-with-shadow box-rounded">
+      <div class="profile-header row">
+        <img class="profile-photo" src="/assets/imgs/profile.png" alt="Thiago Henrique" />
+      </div>
+      <div class="profile-body">
+        <h3>Thiago H de Paulo Lima</h3>
+        <p>Pós-graduado em Big Data pela FIAP, lider de times de engenharia de software desde 2014, sou apaixonado por tecnologia, desde a concepção de arquitetura até desenvolvimento de software.</p>
+        <p>Nos últimos anos, venho dedicando algum tempo estudando Big Data e Data Science, e busco uma oportunidade para aplicá-la profissionalmente.</p>
+      </div>
+      <div class="profile-footer">
+        <div class="d-flex justify-content-between" style="margin: 0 auto">
+         <div class="p-2">
+            <a target="_blank" class="common-link" href="http://linkedin.com/in/thenrique/">
+              <i class="fab fa-linkedin-in fa-2x"></i>
+            </a>  
+          </div>
+          <div class="p-2">
+            <a target="_blank" class="common-link" href="https://twitter.com/thiagohdeplima">
+              <i class="fab fa-twitter fa-2x"></i>
+            </a>
+          </div>
+          <div class="p-2">
+            <a target="_blank" class="common-link" href="https://github.com/thiagohdeplima">
+              <i class="fab fa-github fa-2x"></i>
+            </a>
+          </div>
+          <div class="p-2">
+            <a target="_blank" class="common-link" href="https://github.com/thiagohdeplima">
+              <i class="fab fa-stack-overflow fa-2x"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>

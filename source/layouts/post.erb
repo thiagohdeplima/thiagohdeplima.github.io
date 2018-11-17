@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      <%= Rouge::Themes::ThankfulEyes.render(:scope => '.highlight') %>
+    </style>
+    <%= partial "partials/head" %>
+    <title>Thiago Henrique - <%= current_article.title %></title>
+  </head>
+  <body>
+    <%= partial "partials/header" %>
+    
+    <div class="container">
+      <main>
+        <article class="article-full box-white box-with-shadow box-rounded">
+          <h2><%= current_article.title %></h2>
+          <%= yield %>
+        </article>
+      </main>
+    </div>
+
+    <%= partial "partials/footer" %>
+  </body>
+</html>
