@@ -3,13 +3,13 @@
   <url>
     <loc>https://www.thiagohenrique.com.br/</loc>
     <priority>1.0</priority>
-    <lastmod><%= Time.strptime(blog.articles.last.data.date, "%Y-%m-%d %H:%M %Z").iso8601 %></lastmod>
+    <lastmod><%= blog.articles.last.data.date.iso8601 %></lastmod>
   </url>
   <% blog.articles.each do |article| %>
   <url>
     <loc>https://www.thiagohenrique.com.br/<%= article.destination_path.gsub("index.html", "") %></loc>
     <priority>0.7</priority>
-    <lastmod><%= Time.strptime(article.data.date, "%Y-%m-%d %H:%M %Z").iso8601 %></lastmod>
+    <lastmod><%= article.data.date.iso8601 %></lastmod>
   </url>
   <% end %>
 </urlset>
