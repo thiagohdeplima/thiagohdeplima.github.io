@@ -37,6 +37,8 @@ page '/*.xml',  layout: false
 page '/*.json', layout: false
 page '/*.txt',  layout: false
 
+set :summary_length, 150
+
 set :markdown_engine, :redcarpet
 set :markdown,
   fenced_code_blocks: true,

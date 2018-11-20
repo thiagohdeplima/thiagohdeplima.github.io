@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- bootstrap -->
-<link rel="stylesheet" href="/assets/bootstrap/4.1.3/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/bootstrap/4.1.3/bootstrap.min.css" />
 
 <script src="/assets/bootstrap/4.1.3/bootstrap.min.js"></script>
 <script src="/jquery/slim/3.3.1/jquery-3.3.1.slim.min.js"></script>
@@ -11,15 +11,25 @@
 <!-- /bootstrap -->
 
 <!-- fonts -->
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" />
 <!-- /fonts -->
 
+<!-- metatags -->
+<meta name="author" content="Thiago Henrique de Paulo Lima" />
 
+<% unless current_article.nil? %>
+<% if current_article.data.description.nil? %>
+<meta name="description" content="<%= current_article.summary.gsub('<p>', '').gsub('</p>', '') %>" />
+<% else %>
+<meta name="description" content="<%= current_article.data.description %>" />
+<% end %>
+<% end %>
+<!-- /metatags -->
 
 <!-- main links -->
-<link rel="stylesheet" href="/assets/main.css">
+<link rel="stylesheet" href="/assets/main.css" />
 <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom Feed" %>
 <!-- /main links -->
