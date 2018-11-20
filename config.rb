@@ -50,6 +50,7 @@ activate :directory_indexes
 activate :blog do |blog|
   blog.permalink = "{title}.html"
   blog.sources = "posts/{year}-{month}-{day}-{title}.html"
+  blog.permalink = "/{title}.html"
   blog.layout = "layout"
 
   blog.default_extension = ".md"
