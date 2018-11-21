@@ -29,12 +29,25 @@ a.main-link, a.common-link {
   text-decoration: underline;
 }
 
-.article-content p {
+.article-full {
+  text-align: justify;
+  font-weight: lighter;
+}
+
+.article-full h3 {
+  margin: 1rem 0 2rem 0;
+}
+
+.article-content p, {
   margin: 15px 0 15px 0;
   text-align: justify;
   font-style: italic;
   font-size: 11pt;
   font-family: 'Roboto', sans-serif;
+}
+
+.article-description {
+  margin: 1rem 0 2rem 0;
 }
 
 .article-quote {
@@ -91,7 +104,7 @@ img.profile-photo {
 
 footer {
   position: relative;
-  bottom: 0;
+  top: 18rem;
   width: 100%;
   line-height: 60px;
   background-color: #fff;

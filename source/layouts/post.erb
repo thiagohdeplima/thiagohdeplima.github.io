@@ -12,9 +12,17 @@
     
     <div class="container">
       <main>
-        <article class="article-full box-white box-with-shadow box-rounded">
-          <h2><%= current_article.title %></h2>
-          <%= yield %>
+        <article class="article-full">
+          <div style="margin: 0 auto" class="col-10">
+            <div class="box-white box-with-shadow box-rounded">
+              <h2><%= current_article.title %></h2>
+
+              <p class="article-description text-muted"><%= current_article.data.description %></p>
+
+              <%= yield %>
+            </div>
+          </div>
+
         </article>
       </main>
     </div>
