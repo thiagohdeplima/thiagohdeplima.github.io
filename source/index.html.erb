@@ -9,7 +9,11 @@
           </div>
 
           <div class="article-content">
+          <% if article.data.description.nil? %>
           <%= article.summary %>
+          <% else %>
+          <p><%= article.data.description %></p>
+          <% end %>
           </div>
 
           <div class="article-footer">
