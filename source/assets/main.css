@@ -14,7 +14,7 @@ a.main-link, a.common-link {
   color: rgba(0,0,0,.9);
 }
 
-.article-header h2, .article-full h2 {
+.article-header h2, .article-full h2, .article-body h3 {
   padding-bottom: 10px;
   border-bottom: #eee 1px solid;
   font-family: 'Open Sans', sans-serif;
