@@ -3,28 +3,33 @@
     <main>
       <section class="articles">
         <% blog.articles[0...10].each do |article| %>
-        <article class="article box-white box-with-shadow box-rounded">
-          <div class="article-header">
-            <h2><%= link_to article.title, article %></h2>
+        <div class="card mb-3" style="margin: 10px 0px 10px 0;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="<%= article.data.image %>%" class="card-img" alt="Image">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <span class="article-header">
+                  <h2 class="card-title common-link">
+                    <%= link_to article.title, article %>
+                  </h2>
+                </span>
+                <p class="card-text">
+                  <%= article.data.description %>
+                </p>
+                <p class="card-text">
+                  <small class="text-muted">
+                    Publicado em <time pubdate="pubdate" datetime="<%= article.date.strftime('%Y-%m-%d') %>">
+                      <%= article.date.strftime('%d/%m/%Y') %>
+                    </time>
+                  </small>
+                  <a href="<%= article.url %>" class="float-right">Leia mais</a>
+                </p>
+              </div>
+            </div>
           </div>
-
-          <div class="article-content">
-          <% if article.data.description.nil? %>
-          <%= article.summary %>
-          <% else %>
-          <p><%= article.data.description %></p>
-          <% end %>
-          </div>
-
-          <div class="article-footer">
-            <small class="text-muted">
-              Publicado em <time pubdate="pubdate" datetime="<%= article.date.strftime('%Y-%m-%d') %>">
-                <%= article.date.strftime('%d/%m/%Y') %>
-              </time>
-            </small>
-            <a href="<%= article.url %>" class="float-right">Leia mais</a>
-          </div>
-        </article>
+        </div>
         <% end %>
       </section>
     </main>
