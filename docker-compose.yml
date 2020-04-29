@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  middleman:
+    build: "."
+    ports:
+    - 4567:4567
+    volumes:
+    - .:/srv/app
+    command: tail -f /dev/null
