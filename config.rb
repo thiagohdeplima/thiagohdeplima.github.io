@@ -52,7 +52,7 @@ activate :directory_indexes
 
 activate :blog do |blog|
   blog.permalink = "{title}.html"
-  blog.sources = "posts/{year}-{month}-{day}-{title}.html"
+  blog.sources = "posts/{year}-{month}-{day}-{title}/index.html"
   blog.permalink = "/{title}.html"
   blog.layout = "layout"
 
