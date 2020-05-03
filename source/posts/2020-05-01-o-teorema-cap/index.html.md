@@ -5,31 +5,46 @@ tags: cap, teorema, dados, sistemas distribuídos
 image: /posts/2020-05-01-o-teorema-cap/cover.jpg
 description: Neste artigo, iremos explorar o Teorema CAP e o que ele tem a nos ensinar sobre sistemas distribuídos.
 layout: post
+refs:
+- 'BERKELEY EECS. Towards Robust Towards Robust Distributed Systems Distributed Systems. Disponível em: https://people.eecs.berkeley.edu/~brewer/PODC2000.pdf. Acesso em: 1 mai. 2020.'
+
+- 'STEEM, Maarten Van; TANEMBAUN, Andrew S.; Distributed Systems: Principles and Paradigms. 3. ed. [S.l.]: CreateSpace Independent Publishing Platform, 2017. p. 2-2.'
+
 ---
 
-Teoremas, segundo sua definição clássica, são preposições que podem ser demonstradas por meio de processos lógicos. A computação, assim como diversas outras áreas, possui seus teoremas, dos quais o Teorema CAP é, sem dúvida, um dos mais importantes.
+Teoremas, segundo sua definição clássica, são _proposições que podem ser demonstradas por meio de processos lógicos_. A computação, assim como diversas outras áreas possui seus próprios teoremas dos quais o Teorema CAP é, sem dúvida, um dos mais importantes.
 
-Cunhado por Eric Brewer, este teorema nos trás a seguinte preposição: Um sistema distribuído somente pode ofertar em simultâneo no máximo duas das três propriedades abaixo:
+Cunhado por <a href="https://en.wikipedia.org/wiki/Eric_Brewer_(scientist)" target="_blank">Eric Brewer</a>, este teorema nos trás a seguinte proposição: Um sistema distribuído que compartilhe dados somente pode ofertar em simultâneo no máximo duas das três propriedades abaixo: <sup>1</sup>
 
 * **C**onsistency (Consistência)
 * **A**vailability (Disponibilidade)
 * **P**artitioning tolerance (Tolerância à particionamento)
 
-![Teorema CAP](/posts/2020-05-01-o-teorema-cap/theorem.svg) 
+Em outras palavras: Quando você implementar um sistema distribuído que atenda duas destas três propriedades, você automáticamente abdicou da terceira. Este é um _trade-off_ com o qual você sempre terá que lidar ao implementar este tipo de sistema.
 
-A existência de duas destas três propriedades para fazerem parte de em um sistema distribuído implica automáticamente em abdicar da terceira.
+Neste post vamos revisar o que cada uma destas propriedades significa e as implicações práticas de cada possível combinação delas em um sistema distribuído.
 
-Embora seja aplicável à qualquer sistema distribuído, este conceito hoje é fundamentalmente aplicável em bancos de dados. Entendê-lo e conseguir compreender quais propriedades determinado tipo de banco de dados implementa é fundamental para uma escolha adequada de plataforma NoSQL ou mesmo SQL para resolver determinado problema..
+Entender estes conceitos é fundamentalmente importante para uma correta escolha e implementação de sistemas de fila, bancos de dados NoSQL ou mesmo SQL, sistemas de cache distribuído, etc.
 
-### O que é um sistema distribuído?
-
-<pre>EM DESENVOLVIMENTO</pre>
-
-### Entendendo cada propriedade
+### As propriedades do CAP
 
 #### Consistência
 
-Consistência é a garantia de que todos os nós do sistema distribuído visualizam a versão mais atualizada dos dados e respondem todas requisições com esta versão.
+Consistência é a garantia de que todos os nós de um sistema distribuído visualizam a versão mais atualizada dos dados e respondem todas requisições com esta versão, de modo que não importa qual nó do sistema distribuído receba um pedido de leitura para um determinado dado, sempre será retornada a última versão deste dado.
+
+Para clarificar, visualize a imagem abaixo:
+
+![Consistência](/posts/2020-05-01-o-teorema-cap/consistency.gif)
+
+Neste exemplo, tentamos representar um cenário onde temos um sistema de banco de dados distribuído qualquer, com três nós.
+
+Em meio à estes dados, temos o guardados os dados de uma usuária chamada Joaquina e por algum motivo ela decidiu atualizar seu nome para Angélica, sendo este pedido de atualização recebido pelo terceiro nó do sistema distribuído.
+
+Este sistema é consistente pois, como você poderá notar na animação, o processo de atualização foi realizado simultâneamente em todos os nós banco de dados e com isto, qualquer consulta posterior em qualquer um dos nós retornará a versão atualizada.
+
+Ocorre que o processo de atualização não foi realizado somente em um nó, e sim nos três em simultâneo, de modo que em todos os três nós terão a atualização imediatamente após ela ser concluída, e com isto, qualquer requisição de consulta posterior, em qualquer um dos nós, apresentará o mesmo dado.
+
+Posteriormente, teremos um exemplo prático disto usando MongoDB e Docker.
 
 #### Disponibilidade
 
