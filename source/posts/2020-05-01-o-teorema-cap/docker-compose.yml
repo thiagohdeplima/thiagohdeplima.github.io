@@ -1,0 +1,52 @@
+version: '3'
+
+networks: 
+  replicaset: {}
+
+services: 
+  node01:
+    image: mongo:4.0-xenial
+    networks:
+    - replicaset
+    container_name: node01
+    hostname: node01
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "replicaSet0" ]
+
+  node02:
+    image: mongo:4.0-xenial
+    networks:
+    - replicaset
+    container_name: node02
+    hostname: node02
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "replicaSet0" ]
+
+  node03:
+    image: mongo:4.0-xenial
+    networks:
+    - replicaset
+    container_name: node03
+    hostname: node03
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "replicaSet0" ]
+
+  setup:
+    depends_on:
+    - node01
+    - node02
+    - node03
+    image: mongo:4.0-xenial
+    networks:
+    - replicaset
+    container_name: setup
+    hostname: setup
+    command: >
+      bash -c "sleep 1 && mongo --host node01 --eval 'rs.initiate({
+        \"_id\": \"replicaSet0\",
+        "members": [
+          { \"_id\": 1, \"priority\": 0, \"host\": \"node01:27017\" },
+          { \"_id\": 2, \"priority\": 1, \"host\": \"node02:27017\" },
+          { \"_id\": 3, \"priority\": 1, \"host\": \"node03:27017\" }
+        ]
+      })'"
