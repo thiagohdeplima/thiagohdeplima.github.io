@@ -17,6 +17,8 @@
             <div class="box-white box-with-shadow box-rounded">
               <h2><%= current_article.title %></h2>
 
+              <%= current_article.date.strftime("%d/%m/%Y") %>
+
               <% unless current_article.data.description.nil? %>
               <p class="article-description text-muted">
                 <%= current_article.data.description %>
@@ -25,7 +27,12 @@
 
               <span class="article-body">
               <%= yield %>
-              <div style="clear: both"></div>
+                <hr />
+                <div class="references">
+                  <% current_article.data.refs.each do |reference| %>
+                  <p class="reference text-muted"><%= reference %></p>
+                  <% end %>
+                </div>
               </span>
             </div>
           </div>

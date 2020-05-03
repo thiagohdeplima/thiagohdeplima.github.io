@@ -1,3 +1,11 @@
 .article-full strong {
   font-weight: bold;
 }
+
+.references {
+  clear: both  
+}
+
+p.reference {
+  font-size: 0.8rem;
+}
