@@ -9,3 +9,9 @@
 p.reference {
   font-size: 0.8rem;
 }
+
+.article-full img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
