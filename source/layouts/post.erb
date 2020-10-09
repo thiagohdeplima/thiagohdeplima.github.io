@@ -27,12 +27,14 @@
 
               <span class="article-body">
               <%= yield %>
+                <% if current_article.data.refs.is_a?(Array) %>
                 <hr />
                 <div class="references">
                   <% current_article.data.refs.each do |reference| %>
                   <p class="reference text-muted"><%= reference %></p>
                   <% end %>
                 </div>
+                <% end %>
               </span>
             </div>
           </div>
