@@ -1,0 +1,32 @@
+copyright = "CC BY 4.0"
+defaultContentLanguage = "en-us"
+baseURL = "https://wwww.thiagohenrique.com.br/"
+
+pygmentsCodeFences = true
+
+theme = "hugo-kiera"
+
+[languages]
+  [languages.en-us]
+    weight = 1
+    languageName = "English"
+    title = "Another nerdy blog"
+    contentDir = "content/en"
+
+  [languages.pt-br]
+    weight = 2
+   languageName = "Português"
+    title = "Outro blog nerd"
+    contentDir = "content/pt"
+
+[params]
+  tagline = "With no bike-shed effect"
+
+[author]
+  name          = "Thiago Henrique"
+  devto         = "thiagohdeplima"
+  github        = "thiagohdeplima"
+  linkedin      = "thenrique"
+  twitter       = "thiagohdeplima"
+  instagram     = "thiagohdeplima"
+  stackoverflow = "users/5036456/thiago-henrique"
