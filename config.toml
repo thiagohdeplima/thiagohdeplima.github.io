@@ -1,21 +1,21 @@
-copyright = "CC BY 4.0"
-defaultContentLanguage = "en-us"
-baseURL = "https://wwww.thiagohenrique.com.br/"
+copyright = "Creative Commons by 4.0"
+defaultContentLanguage = "en"
+baseURL = "https://www.thiagohenrique.com.br/"
 
 pygmentsCodeFences = true
 
 theme = "hugo-kiera"
 
 [languages]
-  [languages.en-us]
+  [languages.en]
     weight = 1
     languageName = "English"
     title = "Another nerdy blog"
     contentDir = "content/en"
 
-  [languages.pt-br]
+  [languages.pt]
     weight = 2
-   languageName = "Português"
+    languageName = "Português"
     title = "Outro blog nerd"
     contentDir = "content/pt"
 
