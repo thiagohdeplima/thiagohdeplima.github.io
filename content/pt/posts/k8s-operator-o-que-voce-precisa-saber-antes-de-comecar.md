@@ -1,21 +1,21 @@
 ---
 title: "Entendendo os Operators no k8s"
-date: 2021-01-28T00:09:33-03:00
+date: 2021-02-28T00:09:33-03:00
 draft: true
 author: "Thiago Henrique"
 tags: [kubernetes, operator-sdk, kubebuilder]
 summary: Neste artigo serão apresentados conceitos necessários para que você consiga desenvolver um Kubernetes Operator, compreendendo o que de fato ele é e como funciona.
 ---
 
-<!--
-2. Conceitos
-3. Frameworks
-4. Mãos à massa
--->
+# ATENÇÃO: ESTE ARTIGO AINDA ESTÁ INCOMPLETO. LOGO MAIS FINALIZO! :)
 
 Neste artigo serão apresentados conceitos necessários para que você consiga desenvolver um Kubernetes Operator, compreendendo o que de fato ele é e como funciona.
 
 O conteúdo aqui parte do principio que você já entenda ao menos os objetos básicos do Kubernetes [^kubernetes-objects], bem como saiba utilizar o `kubectl`, e claro, saiba o que é o Kubernetes.
+
+## Arquitetura do Kubernetes
+
+O Kubernetes não possui uma arquitetura monolítica. Ao invés disto, ele é composto de uma série de componentes de software independentes que se conectam entre si para fazer todo seu maquinário funcionar. [^kubernetes-components]
 
 ## Afinal, o que são _Operators_ ?
 
@@ -73,6 +73,8 @@ Ao receber um pedido de alteração no cluster (por exemplo, criação de um nov
 
 <!-- References -->
 [^kubernetes-objects]: [Understanding Kubernetes Objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/)
+
+[^kubernetes-components]: [Kubernetes Components](https://kubernetes.io/docs/concepts/overview/components/)
 
 [^operator-pattern]: [Extending Kubernetes: Operator pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/)
 

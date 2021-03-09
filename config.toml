@@ -12,12 +12,14 @@ theme = "hugo-kiera"
     languageName = "English"
     title = "Another nerdy blog"
     contentDir = "content/en"
+    description = "Personal Blog. Software Engineering, Technology, Teams Leadership and much more!"
 
   [languages.pt]
     weight = 2
     languageName = "Português"
     title = "Outro blog nerd"
     contentDir = "content/pt"
+    description = "Blog pessoal. Engenharia de Software, Tecnologia, Gestão de Equipes e muito mais!"
 
 [params]
   tagline = "With no bike-shed effect"
