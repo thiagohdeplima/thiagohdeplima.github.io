@@ -1,7 +1,7 @@
 ---
 title: "Entendendo os Operators no k8s"
 date: 2021-02-28T00:09:33-03:00
-draft: true
+draft: false
 author: "Thiago Henrique"
 tags: [kubernetes, operator-sdk, kubebuilder]
 summary: Neste artigo serão apresentados conceitos necessários para que você consiga desenvolver um Kubernetes Operator, compreendendo o que de fato ele é e como funciona.
