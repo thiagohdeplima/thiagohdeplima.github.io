@@ -1,23 +1,25 @@
-copyright = "CC BY 4.0"
-defaultContentLanguage = "en-us"
-baseURL = "https://wwww.thiagohenrique.com.br/"
+copyright = "Creative Commons by 4.0"
+defaultContentLanguage = "pt"
+baseURL = "https://www.thiagohenrique.com.br/"
 
 pygmentsCodeFences = true
 
 theme = "hugo-kiera"
 
 [languages]
-  [languages.en-us]
+  [languages.en]
     weight = 1
     languageName = "English"
     title = "Another nerdy blog"
     contentDir = "content/en"
+    description = "Personal Blog. Software Engineering, Technology, Teams Leadership and much more!"
 
-  [languages.pt-br]
+  [languages.pt]
     weight = 2
-   languageName = "Português"
+    languageName = "Português"
     title = "Outro blog nerd"
     contentDir = "content/pt"
+    description = "Blog pessoal. Engenharia de Software, Tecnologia, Gestão de Equipes e muito mais!"
 
 [params]
   tagline = "With no bike-shed effect"
@@ -30,3 +32,4 @@ theme = "hugo-kiera"
   twitter       = "thiagohdeplima"
   instagram     = "thiagohdeplima"
   stackoverflow = "users/5036456/thiago-henrique"
+  youtube       = "/channel/UCDnuQ9P6JRdkG9HNw5yDp9Q"
