@@ -1,6 +1,6 @@
 copyright = "Creative Commons by 4.0"
 defaultContentLanguage = "en"
-baseURL = "https://www.thiagohenrique.com.br/"
+baseURL = "https://www.thiago.tech/"
 
 pygmentsCodeFences = true
 
