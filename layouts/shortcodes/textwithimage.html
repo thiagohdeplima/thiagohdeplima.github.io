@@ -1,0 +1,22 @@
+<style>
+  figure {
+    float: none
+  }
+
+  .image {
+    width: 30%; float: left; box-shadow: none;
+  }
+</style>
+
+<p>
+  <figure>
+    <img class="image" src="{{ .Get "src" }}" alt="{{ .Get "caption" }}" />
+    <figcaption>
+      <h4>{{ .Get "caption" }}</h4>
+    </figcaption>
+  </figure>
+
+  {{ .Inner }}
+</p>
+
+
