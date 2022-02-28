@@ -1,22 +1,16 @@
-<style>
-  figure {
-    float: none
-  }
+<figure>
+  <picture>
+    <source srcset="{{ .Get "dark-src" }}"  media="(prefers-color-scheme: dark)"  />
+    <source srcset="{{ .Get "light-src" }}" media="(prefers-color-scheme: light)" />
 
-  .image {
-    width: 30%; float: left; box-shadow: none;
-  }
-</style>
+    <img alt="{{ .Get "caption" }}" src="{{ .Get "dark-src" }}"  style="width: 30%; float: left; box-shadow: none;" />
+  </picture>
 
-<p>
-  <figure>
-    <img class="image" src="{{ .Get "src" }}" alt="{{ .Get "caption" }}" />
-    <figcaption>
-      <h4>{{ .Get "caption" }}</h4>
-    </figcaption>
-  </figure>
+  <figcaption>
+    <h4>{{ .Get "caption" }}</h4>
+  </figcaption>
+</figure>
 
-  {{ .Inner }}
-</p>
+<p>{{ .Inner }}</p>
 
 
