@@ -38,9 +38,9 @@ Vale ressaltar que isto também vale para atualizações: Se por ventura alguém
 
 ### Disponibilidade
 
-A disponibilidade é sem dúvida o conceito mais simples de se compreender.
+O Teorema CAP considera disponível um sistema que sempre responde a todas as requisições que lhe são feitas, ainda que a resposta seja um erro.
 
-Basicamente, diz respeito à capacidade de um sistema de responder a toda e qualquer requisição que é feita à ele, ainda que esta resposta seja um erro.
+Em outras palavras, não importa qual seja a resposta, um sistema distribuído disponível nunca deixa de enviar uma.
 
 ### Particionamento
 
