@@ -22,9 +22,19 @@ Antes de prosseguirmos na compreensão do teorema em si, é necessário compreen
 
 ### Consistência
 
-Este termo pode ser o que talvez traga mais confusão na sua compreensão, principalmente porque na computação existem outros usos para ele que podem significar coisas diferentes do que este termo significa no contexto do CAP.
+O termo consistência pode trazer alguma confusão na sua compreensão, principalmente porque na computação existem outros usos para ele que podem significar diferentes coisas em diferentes contextos.
 
-Dentro do Teorema CAP, o termo consistência significa basicamente a capacidade de um sistema responder sempre com o dado mais atual.
+{{< textwithimage position="right" light-src="images/consistency-light.png" dark-src="images/consistency-dark.png" >}}
+
+No Teorema CAP, consistência diz respeito à capacidade de um sistema distribuído de responder sempre com o dado mais atual (consistente) possível.
+
+{{< /textwithimage >}}
+
+Olhando o diagrama ao lado, imagine um sistema distribuído com dados de clientes, no qual foi cadastrado uma cliente com o nome Maria e ID 123.
+
+Se este sistema for consistente, quando um segundo usuário requisitar os dados desta usuária 123, os dados retornados serão os dados cadastrados pelo usuário um, mesmo que esta consulta ocorra imediatamente após este registro ter acontecido.
+
+Vale ressaltar que isto também vale para atualizações: Se por ventura alguém atualizar o cadastro da usuária 123 e outro alguém fizer uma consulta dos dados desta usuária - ainda que imediatamente após a atualização - os dados mais atuais serão retornados.
 
 ### Disponibilidade
 
