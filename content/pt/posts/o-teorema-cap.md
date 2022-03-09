@@ -14,7 +14,7 @@ Neste contexto, o Teorema CAP é uma excelente ferramenta, e ele será apresenta
 
 ## Mas afinal, o que é este Teorema CAP ?
 
-{{< textwithimage position="left" light-src="images/cap-light.png" dark-src="images/cap-dark.png" >}}
+{{< textwithimage image-size="50%" position="left" light-src="images/cap-light.png" dark-src="images/cap-dark.png" >}}
 O Teorema CAP foi concebido por Eric Brewer, ex-professor da Universidade de Berkeley e pesquisador de computação distribuída. Sua premissa central é que um sistema distribuído pode ter simultâneamente duas das três propriedades representadas por cada uma das letras que compõem seu nome:  Consistência, Disponibilidade (do inglês, Availability), e Particionamento dos dados.
 {{< /textwithimage >}}
 
@@ -24,7 +24,7 @@ Antes de prosseguirmos na compreensão do teorema em si, é necessário compreen
 
 O termo consistência pode trazer alguma confusão na sua compreensão, principalmente porque na computação existem outros usos para ele que podem significar diferentes coisas em diferentes contextos.
 
-{{< textwithimage position="right" light-src="images/consistency-light.png" dark-src="images/consistency-dark.png" >}}
+{{< textwithimage image-size="50%" position="right" light-src="images/consistency-light.png" dark-src="images/consistency-dark.png" >}}
 
 No Teorema CAP, consistência diz respeito à capacidade de um sistema distribuído de responder sempre com o dado mais atual (consistente) possível.
 
@@ -48,7 +48,7 @@ Sistemas distribuídos que possuem particionamento são, no fim das contas, aque
 
 ## Consistência e Disponibilidade
 
-{{< textwithimage position="right" light-src="images/cap-ca-light.png" dark-src="images/cap-ca-dark.png" >}}
+{{< textwithimage image-size="30%" position="right" light-src="images/cap-ca-light.png" dark-src="images/cap-ca-dark.png" >}}
 Sit tempor ullamco nostrud commodo incididunt nostrud reprehenderit eu nostrud laboris anim. Et incididunt officia dolor do minim. Id pariatur fugiat laborum ad. Incididunt sunt nulla nulla cupidatat aliqua do culpa ex consectetur excepteur qui ex. Irure ex cillum pariatur officia non sit fugiat do sit dolore nostrud velit qui.
 {{< /textwithimage >}}
 

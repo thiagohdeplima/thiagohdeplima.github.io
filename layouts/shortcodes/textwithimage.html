@@ -3,7 +3,7 @@
     <source srcset="{{ .Get "dark-src" }}"  media="(prefers-color-scheme: dark)"  />
     <source srcset="{{ .Get "light-src" }}" media="(prefers-color-scheme: light)" />
 
-    <img alt="{{ .Get "caption" }}" src="{{ .Get "dark-src" }}"  style="width: 30%; float: {{ .Get "position" }}; box-shadow: none;" />
+    <img alt="{{ .Get "caption" }}" src="{{ .Get "dark-src" }}"  style="width: {{ .Get "image-size" }}; float: {{ .Get "position" }}; box-shadow: none;" />
   </picture>
 
   <figcaption>
