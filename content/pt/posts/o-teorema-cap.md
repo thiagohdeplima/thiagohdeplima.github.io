@@ -10,46 +10,54 @@ Sistemas distribuídos estão em todos os lugares nos dias atuais. Clusters de K
 
 Quando nestes sistemas passamos a ter dados envolvidos, a escolha da arquitetura deve ser muito bem pensada, _tradeoffs_ devem ser compreendidos e bem análisados, do contrário, efeitos negativos da escolha da arquitetura podem pesar sobre o projeto que faz uso destes sistemas.
 
-Neste contexto, o Teorema CAP é uma excelente ferramenta, e ele será apresentado neste artigo em duas fases: a ideia central por trás do mesmo e a perspectiva de sistemas modernos para o mesmo.
+Este artigo pretende apresentar o Teorema CAP e ajudar o leitor a compreender como ele pode ajudar na escolha de uma arquitetura - ou ferramenta - adequada para cada cenário com sistemas distribuídos.
 
 ## Mas afinal, o que é este Teorema CAP ?
 
-{{< textwithimage image-size="50%" position="left" light-src="images/cap-light.png" dark-src="images/cap-dark.png" >}}
-O Teorema CAP foi concebido por Eric Brewer, ex-professor da Universidade de Berkeley e pesquisador de computação distribuída. Sua premissa central é que um sistema distribuído pode ter simultâneamente duas das três propriedades representadas por cada uma das letras que compõem seu nome:  Consistência, Disponibilidade (do inglês, Availability), e Particionamento dos dados.
-{{< /textwithimage >}}
+O Teorema CAP foi concebido por Eric Brewer, ex-professor da Universidade de Berkeley e pesquisador de computação distribuída, e pode ser resumido em duas premissas simples:
 
-Antes de prosseguirmos na compreensão do teorema em si, é necessário compreender o que cada um destes itens significa.
+{{< textwithimage image-size="50%" position="left" light-src="images/cap-light.png" dark-src="images/cap-dark.png" >}}{{< /textwithimage >}}
+
+1. Um sistema distribuído pode apresentar três propriedades, Consistência, disponibilidade (availability) e tolerância à particionamento dos dados em rede;
+
+2. Via de regra, um sistema distribuído poderá contar com no máximo duas das três propriedades, ou seja, ao escolher duas, você abriu mão da terceira propriedade;
+
+Afim de garantir total compreensão do Teorema CAP, é importante esclarecer no que realmente consistem cada uma destas três propriedades.
 
 ### Consistência
 
 O termo consistência pode trazer alguma confusão na sua compreensão, principalmente porque na computação existem outros usos para ele que podem significar diferentes coisas em diferentes contextos.
 
-{{< textwithimage image-size="50%" position="right" light-src="images/consistency-light.png" dark-src="images/consistency-dark.png" >}}
+{{< textwithimage image-size="50%" position="right" light-src="images/consistency-light.png" dark-src="images/consistency-dark.png" >}}{{< /textwithimage >}}
 
-No Teorema CAP, consistência diz respeito à capacidade de um sistema distribuído de responder sempre com o dado mais atual (consistente) possível.
+No Teorema CAP, consistência diz respeito à capacidade de um sistema distribuído de disponibilizar um dado tão logo ele tenha sido escrito, ou seja, os dados fornecidos serão sempre os mais atuais (consistentes) que o sistema possuir.
 
-{{< /textwithimage >}}
+O diagrama ao lado ilustra uma situação de consistência. No mesmo, temos uma representação de um cenário no qual foi cadastrado uma cliente com o nome Maria e ID 123.
 
-Olhando o diagrama ao lado, imagine um sistema distribuído com dados de clientes, no qual foi cadastrado uma cliente com o nome Maria e ID 123.
+Em um sistema consistente, quando um segundo usuário requisitar os dados desta usuária 123, os dados retornados serão os dados cadastrados pelo usuário um, mesmo que esta consulta ocorra imediatamente após este registro ter acontecido.
 
-Se este sistema for consistente, quando um segundo usuário requisitar os dados desta usuária 123, os dados retornados serão os dados cadastrados pelo usuário um, mesmo que esta consulta ocorra imediatamente após este registro ter acontecido.
-
-Vale ressaltar que isto também vale para atualizações: Se por ventura alguém atualizar o cadastro da usuária 123 e outro alguém fizer uma consulta dos dados desta usuária - ainda que imediatamente após a atualização - os dados mais atuais serão retornados.
+Isto vale para qualquer tipo de operação de escrita, seja ela a criação de um dado novo, uma atualização ou mesmo exclusão de dados. Em um sistema consistente, estas operações terão efeito imediato após sua execução.
 
 ### Disponibilidade
 
-O Teorema CAP considera disponível um sistema que sempre responde a todas as requisições que lhe são feitas, ainda que a resposta seja um erro.
+Disponibilidade é um conceito simples de se compreender: É a capacidade de sistema de sempre garantir uma resposta sem erros à quem lhe solicita algum dado.
 
-Em outras palavras, não importa qual seja a resposta, um sistema distribuído disponível nunca deixa de enviar uma.
+Em termos práticos, sempre que você realizar uma requisição à um sistema distribuído disponível o mesmo te dará uma resposta com o dado que você solicitou, podendo este dado estar ou não consistente.
 
 ### Particionamento
 
-Sistemas distribuídos que possuem particionamento são, no fim das contas, aqueles cujos dados contidos neles estão distribuídos entre diversos nós, ou seja, cada nó possui um pedaço do todo.
+Particionamento de rede diz respeito à distribuição dos dados entre os nós do sistema distribuído.
+
+{{< textwithimage image-size="40%" position="right" light-src="images/partitioning-light.png" dark-src="images/partitioning-dark.png" >}}{{< /textwithimage >}}
+
+Em um sistema distribuído com tolerância à particionamento nenhum dos servidores conterá a completude dos dados, cada pedaço do todo estará presente em um nó.
+
+Ao lado temos uma ilustração que representa de uma forma simples um sistema distribuído com tolerância à particionamento armazenando cadastro de pessoas.
+
+Note que as pessoas cadastradas estão espalhadas, e mesmo que haja cenários como o da pessoa John, cujos dados estão presentes em dois dos três nós deste sistema, os dados deste sistema estão totalmente dispersos entre os nós, nenhum deles tem a completude dos dados armazenados.
 
 ## Consistência e Disponibilidade
 
-{{< textwithimage image-size="30%" position="right" light-src="images/cap-ca-light.png" dark-src="images/cap-ca-dark.png" >}}
-Sit tempor ullamco nostrud commodo incididunt nostrud reprehenderit eu nostrud laboris anim. Et incididunt officia dolor do minim. Id pariatur fugiat laborum ad. Incididunt sunt nulla nulla cupidatat aliqua do culpa ex consectetur excepteur qui ex. Irure ex cillum pariatur officia non sit fugiat do sit dolore nostrud velit qui.
-{{< /textwithimage >}}
+{{< textwithimage image-size="30%" position="right" light-src="images/cap-ca-light.png" dark-src="images/cap-ca-dark.png" >}}{{< /textwithimage >}}
 
 
