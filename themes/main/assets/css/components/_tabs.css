@@ -1,0 +1,87 @@
+/* =============================================================
+   Tabbed code blocks — tab-group, tab-nav, tab-btn, tab-panel
+   ============================================================= */
+
+.tab-group {
+  margin:        var(--space-8) 0;
+  border:        1px solid var(--color-code-border);
+  border-radius: var(--radius-lg);
+  overflow:      hidden;
+  transition:
+    border-color     var(--transition-normal),
+    background-color var(--transition-normal);
+}
+
+/* ---- Tab navigation bar (injected by tabs.js) ---- */
+
+.tab-nav {
+  display:       flex;
+  background:    var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-code-border);
+  overflow-x:    auto;
+  scrollbar-width: none;
+  transition:
+    background-color var(--transition-normal),
+    border-color     var(--transition-normal);
+}
+
+.tab-nav::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  flex-shrink:    0;
+  padding:        var(--space-2) var(--space-4);
+  font-family:    var(--font-code);
+  font-size:      var(--text-sm);
+  font-weight:    var(--weight-medium);
+  color:          var(--color-text-muted);
+  background:     transparent;
+  border:         none;
+  border-bottom:  2px solid transparent;
+  cursor:         pointer;
+  white-space:    nowrap;
+  line-height:    var(--leading-relaxed);
+  transition:
+    color        var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.tab-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.tab-btn.is-active {
+  color:              var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+.tab-btn:focus-visible {
+  outline:        2px solid var(--color-accent-2);
+  outline-offset: -2px;
+}
+
+/* ---- Tab panels ---- */
+
+.tab-panel[hidden] { display: none; }
+
+/*
+  Code blocks inside a panel inherit the tab-group's border and
+  radius — remove the duplicate chrome that .highlight normally adds.
+*/
+.tab-panel .highlight {
+  margin:        0;
+  border:        none;
+  border-radius: 0;
+}
+
+/* The copy button is still visible; just re-anchor it to the panel */
+.tab-panel .highlight .code-copy {
+  top:   var(--space-2);
+  right: var(--space-2);
+}
+
+/* ---- Prose context ---- */
+
+.prose .tab-group {
+  margin-top:    var(--space-6);
+  margin-bottom: var(--space-6);
+}

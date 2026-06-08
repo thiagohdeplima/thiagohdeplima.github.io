@@ -1,0 +1,22 @@
+{{/*
+  Tab group container.
+  Use angle-bracket delimiters so inner shortcodes are rendered first.
+
+  Usage:
+    {{< tabs >}}
+    {{< tab "Go" >}}
+    ```go
+    func main() {}
+    ```
+    {{< /tab >}}
+    {{< tab "Python" >}}
+    ```python
+    def main(): pass
+    ```
+    {{< /tab >}}
+    {{< /tabs >}}
+
+  Tabs with the same label across multiple groups on a page
+  are synchronised automatically by tabs.js.
+*/}}
+<div class="tab-group">{{ .Inner }}</div>

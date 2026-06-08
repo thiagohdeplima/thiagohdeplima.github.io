@@ -22,6 +22,24 @@ ip link show type veth
 iptables -t nat -L PREROUTING --line-numbers
 ```
 
+{{< tabs >}}
+{{< tab "iptables" >}}
+```bash
+iptables -t nat -L PREROUTING --line-numbers
+```
+{{< /tab >}}
+{{< tab "nftables" >}}
+```bash
+nft list table ip nat
+```
+{{< /tab >}}
+{{< tab "eBPF" >}}
+```bash
+bpftool prog list
+```
+{{< /tab >}}
+{{< /tabs >}}
+
 ## Section Two
 
 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt.

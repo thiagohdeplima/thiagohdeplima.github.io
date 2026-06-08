@@ -28,6 +28,7 @@
     (resources.Get "css/components/_code.css")
     (resources.Get "css/components/_math.css")
     (resources.Get "css/components/_callout.css")
+    (resources.Get "css/components/_tabs.css")
     (resources.Get "css/components/_search.css")
     (resources.Get "css/components/_pagination.css")
     (resources.Get "css/components/_footer.css")
@@ -60,8 +61,10 @@
 
   {{- $themeJS   := resources.Get "js/theme.js"     | resources.Minify | resources.Fingerprint -}}
   {{- $copyJS    := resources.Get "js/copy-code.js" | resources.Minify | resources.Fingerprint -}}
+  {{- $tabsJS    := resources.Get "js/tabs.js"      | resources.Minify | resources.Fingerprint -}}
   <script src="{{ $themeJS.RelPermalink }}"  integrity="{{ $themeJS.Data.Integrity }}"  crossorigin="anonymous" defer></script>
   <script src="{{ $copyJS.RelPermalink }}"   integrity="{{ $copyJS.Data.Integrity }}"   crossorigin="anonymous" defer></script>
+  <script src="{{ $tabsJS.RelPermalink }}"   integrity="{{ $tabsJS.Data.Integrity }}"   crossorigin="anonymous" defer></script>
 
   {{ block "scripts" . }}{{ end }}
 </body>

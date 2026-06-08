@@ -1,0 +1,11 @@
+{{/*
+  Individual tab panel.
+  First positional param (or named param "label") is the tab label.
+
+  The panel is hidden by default; tabs.js reveals the active one
+  and injects the tab navigation buttons above the group.
+*/}}
+{{- $label := .Get 0 | default (.Get "label") | default "Tab" -}}
+<div class="tab-panel" data-label="{{ $label }}" hidden>
+  {{ .Inner | markdownify }}
+</div>
