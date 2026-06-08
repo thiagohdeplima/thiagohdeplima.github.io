@@ -1,0 +1,8 @@
+{{- $title := .Get "title" | default "Warning" -}}
+<div class="callout callout--warning" role="note" aria-label="{{ $title }}">
+  <div class="callout__icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2.5L18 17H2L10 2.5Z"/><line x1="10" y1="8.5" x2="10" y2="12"/><circle cx="10" cy="14.5" r="0.75" fill="currentColor" stroke="none"/></svg></div>
+  <div class="callout__body">
+    <p class="callout__title">{{ $title }}</p>
+    <div class="callout__content">{{ .Inner | markdownify }}</div>
+  </div>
+</div>

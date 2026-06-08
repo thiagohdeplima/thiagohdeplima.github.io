@@ -1,0 +1,23 @@
+{{/*
+  Pull quote shortcode.
+  Usage (renders inner as Markdown):
+    {{% quote author="Leslie Lamport" source="Paxos Made Simple" %}}
+    A distributed system is one where...
+    {{% /quote %}}
+
+  Parameters:
+    author (string, optional): attribution name
+    source (string, optional): publication or context
+*/}}
+{{- $author := .Get "author" -}}
+{{- $source := .Get "source" -}}
+
+<blockquote class="pull-quote">
+  <div class="pull-quote__text">{{ .Inner | markdownify }}</div>
+  {{- if $author }}
+  <footer class="pull-quote__attribution">
+    <span class="pull-quote__author">{{ $author }}</span>
+    {{- with $source }}<cite class="pull-quote__source">{{ . }}</cite>{{- end }}
+  </footer>
+  {{- end }}
+</blockquote>

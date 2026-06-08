@@ -1,0 +1,75 @@
+baseURL: 'https://thiagohdeplima.github.io/'
+locale: en-us
+title: Thiago Lima
+theme: main
+
+enableRobotsTXT: true
+paginate: 10
+
+markup:
+  highlight:
+    style: github
+    lineNos: true
+    lineNumbersInTable: true
+    tabWidth: 2
+    noClasses: false
+    guessSyntax: true
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - ['$$', '$$']
+            - ['\[', '\]']
+          inline:
+            - ['$', '$']
+            - ['\(', '\)']
+  tableOfContents:
+    startLevel: 2
+    endLevel: 3
+    ordered: false
+
+taxonomies:
+  tag: tags
+  category: categories
+  series: series
+
+params:
+  description: 'Engineering research on distributed systems, machine learning, and infrastructure.'
+  author: Thiago Lima
+  ogLocale: en_US
+  math: false
+  social:
+    github: thiagohdeplima
+    twitter: ''
+    linkedin: ''
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+  section:
+    - HTML
+    - RSS
+  term:
+    - HTML
+    - RSS
+
+menus:
+  main:
+    - name: Writing
+      pageRef: /posts
+      weight: 10
+    - name: Series
+      pageRef: /series
+      weight: 20
+    - name: Tags
+      pageRef: /tags
+      weight: 30
+    - name: Search
+      pageRef: /search
+      weight: 40

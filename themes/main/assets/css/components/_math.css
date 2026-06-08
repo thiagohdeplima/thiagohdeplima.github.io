@@ -1,0 +1,61 @@
+/* =============================================================
+   Mathematics — KaTeX display/inline integration within prose
+   ============================================================= */
+
+/*
+  KaTeX injects .katex and .katex-display elements.
+  We only need to handle layout — token colors and fonts
+  come from the KaTeX CSS loaded in head/math.html.
+*/
+
+/* ---- Display (block) math ---- */
+
+.katex-display {
+  overflow-x: auto;   /* wide equations scroll rather than overflow */
+  overflow-y: hidden;
+  padding:    var(--space-2) 0;
+  margin:     var(--space-8) 0;
+  text-align: center;
+}
+
+/* Inside prose, align with the text rhythm */
+.prose .katex-display {
+  margin-top:    var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+/* ---- Inline math ---- */
+
+.katex {
+  font-size:      1.05em; /* KaTeX default can look slightly small in Inter */
+  vertical-align: middle;
+}
+
+/* Prevent inline math from causing line-height disruption in prose */
+.prose .katex {
+  line-height: 0;
+  vertical-align: -0.125em;
+}
+
+/* ---- KaTeX color token overrides for dark mode ---- */
+/*
+  KaTeX renders everything in SVG/HTML with explicit colors.
+  The main text color inherits from the body, but some annotation
+  colors (e.g., color on \colorbox) default to black.
+  We override only the base text color here.
+*/
+[data-theme="dark"] .katex {
+  color: var(--color-text-primary);
+}
+
+/* ---- Error display ---- */
+
+.katex-error {
+  color:       var(--color-caution-text);
+  font-family: var(--font-code);
+  font-size:   var(--text-sm);
+  background:  var(--color-caution-bg);
+  border:      1px solid var(--color-caution-border);
+  border-radius: var(--radius-sm);
+  padding:     var(--space-1) var(--space-2);
+}

@@ -1,0 +1,42 @@
+<header class="article-header">
+
+  {{/* Category */}}
+  {{- with .Params.categories }}
+  <a href="/categories/{{ index . 0 | urlize }}/" class="article-header__category">
+    {{- index . 0 -}}
+  </a>
+  {{- end }}
+
+  {{/* Title */}}
+  <h1 class="article-header__title">{{ .Title }}</h1>
+
+  {{/* Subtitle */}}
+  {{- with .Params.subtitle }}
+  <p class="article-header__subtitle">{{ . }}</p>
+  {{- end }}
+
+  {{/* Meta row */}}
+  <div class="article-header__meta">
+    {{- with site.Params.author }}
+    <span class="article-header__author">{{ . }}</span>
+    <span class="article-header__meta-sep">·</span>
+    {{- end }}
+    <time datetime="{{ .Date.Format "2006-01-02" }}">
+      {{- .Date.Format "January 2, 2006" -}}
+    </time>
+    {{- with .ReadingTime }}
+    <span class="article-header__meta-sep">·</span>
+    <span>{{ . }} min read</span>
+    {{- end }}
+  </div>
+
+  {{/* Tags */}}
+  {{- with .Params.tags }}
+  <div class="article-header__tags">
+    {{- range . }}
+    <a href="/tags/{{ . | urlize }}/" class="tag">#{{ . }}</a>
+    {{- end }}
+  </div>
+  {{- end }}
+
+</header>

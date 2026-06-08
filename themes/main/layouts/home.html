@@ -1,0 +1,107 @@
+{{ define "main" }}
+
+{{/* ═══════════════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════════════ */}}
+<section class="hero">
+  <div class="hero__inner">
+
+    <div class="hero__content">
+      <p class="hero__eyebrow">Engineering Research</p>
+      <h1 class="hero__title">
+        {{- site.Params.heroTitle | default "Distributed systems,&nbsp;machine learning, and infrastructure." | safeHTML -}}
+      </h1>
+      <p class="hero__description">
+        Long-form technical writing for senior engineers, architects,
+        and machine learning practitioners who build systems at scale.
+      </p>
+      <div class="hero__actions">
+        <a href="/posts/"  class="btn btn--primary">Read Articles</a>
+        <a href="/series/" class="btn btn--ghost">Browse Series</a>
+      </div>
+    </div>
+
+    <div class="hero__diagram-wrap">
+      {{ partial "hero-diagram.html" . }}
+    </div>
+
+  </div>
+</section>
+
+
+{{/* ═══════════════════════════════════════════════════════════
+     FEATURED ARTICLES
+     ═══════════════════════════════════════════════════════════ */}}
+{{- $featured := where (where site.RegularPages "Section" "posts") "Params.featured" true | first 3 -}}
+{{- if $featured }}
+<section class="home-section home-featured">
+  <div class="home-section__inner">
+    <header class="home-section__header">
+      <h2 class="home-section__title">Featured</h2>
+      <a href="/posts/" class="home-section__all">All articles →</a>
+    </header>
+    <div class="card-grid">
+      {{- range $featured }}
+      {{ partial "article-card.html" . }}
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{- end }}
+
+
+{{/* ═══════════════════════════════════════════════════════════
+     SERIES
+     ═══════════════════════════════════════════════════════════ */}}
+{{- $allSeries := site.Taxonomies.series -}}
+{{- if $allSeries }}
+<section class="home-section home-series">
+  <div class="home-section__inner">
+    <header class="home-section__header">
+      <h2 class="home-section__title">Series</h2>
+      <a href="/series/" class="home-section__all">All series →</a>
+    </header>
+    <div class="series-list">
+      {{- range $name, $pages := $allSeries }}
+      {{- $termPage := site.GetPage (printf "/series/%s" ($name | urlize)) -}}
+      <a
+        href="{{ if $termPage }}{{ $termPage.RelPermalink }}{{ else }}/series/{{ $name | urlize }}/{{ end }}"
+        class="series-item"
+      >
+        <div class="series-item__body">
+          <span class="series-item__name">{{ if $termPage }}{{ $termPage.Title }}{{ else }}{{ $name | title }}{{ end }}</span>
+          <span class="series-item__count">
+            {{- len $pages }}
+            {{- if eq (len $pages) 1 }} article{{ else }} articles{{ end -}}
+          </span>
+        </div>
+        <span class="series-item__arrow" aria-hidden="true">→</span>
+      </a>
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{- end }}
+
+
+{{/* ═══════════════════════════════════════════════════════════
+     LATEST ARTICLES
+     ═══════════════════════════════════════════════════════════ */}}
+{{- $latest := where site.RegularPages "Section" "posts" | first 8 -}}
+{{- if $latest }}
+<section class="home-section home-latest">
+  <div class="home-section__inner">
+    <header class="home-section__header">
+      <h2 class="home-section__title">Latest</h2>
+      <a href="/posts/" class="home-section__all">All articles →</a>
+    </header>
+    <div class="post-list">
+      {{- range $latest }}
+      {{ partial "post-row.html" . }}
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{- end }}
+
+{{ end }}

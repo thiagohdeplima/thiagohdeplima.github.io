@@ -1,0 +1,27 @@
+{{/* Article card — used in featured grid and any 3-column section */}}
+<article class="card">
+  <a href="{{ .RelPermalink }}" class="card__inner">
+
+    {{- with .Params.categories }}
+    <span class="card__category">{{ index . 0 }}</span>
+    {{- end }}
+
+    <h3 class="card__title">{{ .Title }}</h3>
+
+    {{- with .Params.subtitle }}
+    <p class="card__subtitle">{{ . }}</p>
+    {{- end }}
+
+    <p class="card__excerpt">{{ .Summary | plainify | truncate 160 }}</p>
+
+    <footer class="card__footer">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">
+        {{- .Date.Format "Jan 2, 2006" -}}
+      </time>
+      {{- with .ReadingTime }}
+      <span class="card__reading-time">{{ . }} min read</span>
+      {{- end }}
+    </footer>
+
+  </a>
+</article>

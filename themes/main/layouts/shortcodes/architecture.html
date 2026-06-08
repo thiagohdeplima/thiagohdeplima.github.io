@@ -1,0 +1,22 @@
+{{/*
+  Architecture diagram shortcode — wrapper for inline SVG diagrams.
+  Use angle-bracket delimiters so inner SVG is not processed as Markdown.
+
+  Usage:
+    {{< architecture caption="Request lifecycle through the API gateway" >}}
+    <svg viewBox="0 0 480 200" ...>
+      ...
+    </svg>
+    {{< /architecture >}}
+
+  Parameters:
+    caption (string, optional): figure caption
+*/}}
+{{- $caption := .Get "caption" -}}
+
+<figure class="arch-diagram">
+  {{ .Inner | safeHTML }}
+  {{- with $caption }}
+  <figcaption>{{ . }}</figcaption>
+  {{- end }}
+</figure>

@@ -1,0 +1,146 @@
+/* =============================================================
+   Dark Mode — token overrides only.
+   Applied via [data-theme="dark"] (JS toggle) or via the
+   OS preference when the attribute hasn't been set yet.
+   Never inverts colors — uses a dedicated warm-dark palette.
+   ============================================================= */
+
+/* Applied immediately by JS before first paint; no FOCT */
+[data-theme="dark"] {
+  /* ---- Backgrounds ---- */
+  --color-bg:            #111214;
+  --color-bg-subtle:     #1A1D21;
+  --color-surface:       #1E2128;
+
+  /* ---- Borders ---- */
+  --color-border:        #2D3139;
+  --color-border-subtle: #252830;
+
+  /* ---- Text ---- */
+  --color-text-primary:   #E8E8E6;
+  --color-text-secondary: #9CA3AF;
+  --color-text-tertiary:  #6B7280;
+  --color-text-muted:     #4B5563;
+
+  /* ---- Accent ---- */
+  --color-accent:        #38BDF8;
+  --color-accent-2:      #60A5FA;
+  --color-accent-subtle: rgb(56 189 248 / 0.12);
+
+  /* ---- Links ---- */
+  --color-link:          #60A5FA;
+  --color-link-hover:    #93C5FD;
+  --color-link-visited:  #A78BFA;
+
+  /* ---- Code ---- */
+  --color-code-bg:       #1E2128;
+  --color-code-border:   #2D3139;
+  --color-code-text:     #E8E8E6;
+
+  /* ---- Callouts ---- */
+  --color-info-bg:        rgb(59 130 246 / 0.10);
+  --color-info-border:    #3B82F6;
+  --color-info-text:      #93C5FD;
+  --color-warning-bg:     rgb(245 158 11 / 0.10);
+  --color-warning-border: #F59E0B;
+  --color-warning-text:   #FCD34D;
+  --color-tip-bg:         rgb(34 197 94 / 0.10);
+  --color-tip-border:     #22C55E;
+  --color-tip-text:       #86EFAC;
+  --color-caution-bg:     rgb(244 63 94 / 0.10);
+  --color-caution-border: #F43F5E;
+  --color-caution-text:   #FDA4AF;
+
+  /* ---- Shadows (heavier in dark to create lift) ---- */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.30);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.40), 0 2px 4px -2px rgb(0 0 0 / 0.30);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.50), 0 4px 6px -4px rgb(0 0 0 / 0.40);
+
+  /* Native UI (scrollbars, form controls) use dark system theme */
+  color-scheme: dark;
+}
+
+/* ---- Component overrides ---------------------------------------- */
+
+/*
+  Primary button: dark mode accent (#38BDF8) is a light cyan that
+  fails WCAG AA with white text (~2.1:1). Use near-black text instead
+  which gives ~9:1 contrast and reads as an active call-to-action.
+*/
+[data-theme="dark"] .btn--primary {
+  color:            #0a1628;
+  background-color: var(--color-accent);
+  border-color:     var(--color-accent);
+}
+
+[data-theme="dark"] .btn--primary:hover {
+  color:            #0a1628;
+  background-color: var(--color-accent-2);
+  border-color:     var(--color-accent-2);
+}
+
+/*
+  Skip link inherits the same fix — white on cyan fails contrast.
+*/
+[data-theme="dark"] .skip-link {
+  color: #0a1628;
+}
+
+/*
+  Code blocks — add transition so they don't hard-flash on theme toggle.
+  Applied here so it's only active after the page has loaded (the
+  inline FOCT script runs before transitions are set).
+*/
+[data-theme="dark"] .highlight,
+[data-theme="dark"] .chroma {
+  transition:
+    background-color var(--transition-normal),
+    border-color     var(--transition-normal);
+}
+
+/*
+  Images — slight dimming in dark mode prevents full-brightness photos
+  from being jarring against the dark background.
+*/
+[data-theme="dark"] img:not([src$=".svg"]) {
+  opacity: 0.88;
+}
+
+/* Fallback for when JS hasn't run yet — respects OS preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg:            #111214;
+    --color-bg-subtle:     #1A1D21;
+    --color-surface:       #1E2128;
+    --color-border:        #2D3139;
+    --color-border-subtle: #252830;
+    --color-text-primary:   #E8E8E6;
+    --color-text-secondary: #9CA3AF;
+    --color-text-tertiary:  #6B7280;
+    --color-text-muted:     #4B5563;
+    --color-accent:        #38BDF8;
+    --color-accent-2:      #60A5FA;
+    --color-accent-subtle: rgb(56 189 248 / 0.12);
+    --color-link:          #60A5FA;
+    --color-link-hover:    #93C5FD;
+    --color-link-visited:  #A78BFA;
+    --color-code-bg:       #1E2128;
+    --color-code-border:   #2D3139;
+    --color-code-text:     #E8E8E6;
+    --color-info-bg:        rgb(59 130 246 / 0.10);
+    --color-info-border:    #3B82F6;
+    --color-info-text:      #93C5FD;
+    --color-warning-bg:     rgb(245 158 11 / 0.10);
+    --color-warning-border: #F59E0B;
+    --color-warning-text:   #FCD34D;
+    --color-tip-bg:         rgb(34 197 94 / 0.10);
+    --color-tip-border:     #22C55E;
+    --color-tip-text:       #86EFAC;
+    --color-caution-bg:     rgb(244 63 94 / 0.10);
+    --color-caution-border: #F43F5E;
+    --color-caution-text:   #FDA4AF;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.30);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.40), 0 2px 4px -2px rgb(0 0 0 / 0.30);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.50), 0 4px 6px -4px rgb(0 0 0 / 0.40);
+  }
+}

@@ -1,0 +1,53 @@
+{{/*
+  KaTeX — loaded only when front matter has `math: true` or site.Params.math = true.
+
+  KaTeX 0.16.x CDN via jsDelivr. The CSS is render-blocking (intentional —
+  prevents a flash of unstyled math); the JS files are deferred.
+
+  The passthrough extension in hugo.toml prevents Goldmark from processing
+  LaTeX content inside $...$ and $$...$$ delimiters, so underscores and
+  carets reach KaTeX unescaped.
+*/}}
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+{{/* KaTeX CSS — loads synchronously to avoid FOUM (flash of unstyled math) */}}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+  crossorigin="anonymous"
+>
+
+{{/* KaTeX core — deferred; does not block first paint */}}
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+  crossorigin="anonymous"
+></script>
+
+{{/* Auto-render extension — finds and renders all delimited math in the page */}}
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  crossorigin="anonymous"
+></script>
+
+{{/* Initialisation — runs after both deferred scripts have loaded */}}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof renderMathInElement === 'undefined') { return; }
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$',  right: '$$',  display: true  },
+        { left: '\\[', right: '\\]', display: true  },
+        { left: '$',   right: '$',   display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      throwOnError:  false,  /* render a readable error span rather than throwing */
+      errorColor:    'var(--color-caution-text)',
+      strict:        false,
+      trust:         false,  /* disallow \url and other potentially unsafe macros */
+      /* Skip code blocks — LaTeX-like notation in code shouldn't be rendered */
+      ignoredTags:   ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    });
+  });
+</script>

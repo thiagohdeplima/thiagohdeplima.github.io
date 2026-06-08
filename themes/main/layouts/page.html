@@ -1,0 +1,61 @@
+{{ define "main" }}
+<div class="article-wrap">
+
+  {{/* Article header — category, title, subtitle, meta, tags */}}
+  {{ partial "article-header.html" . }}
+
+  {{/* Mobile TOC — visible below 1024px, above the prose */}}
+  {{ partial "toc.html" (dict "page" . "mobile" true) }}
+
+  <div class="article-body">
+
+    {{/* Desktop sticky TOC sidebar */}}
+    <aside class="article-toc-sidebar" aria-label="Table of contents">
+      {{ partial "toc.html" (dict "page" . "mobile" false) }}
+    </aside>
+
+    {{/* Prose */}}
+    <div class="article-prose">
+      <div class="prose" id="article-prose">
+        {{ .Content }}
+      </div>
+
+      {{/* Article footer — tags + series nav */}}
+      <footer class="article-footer">
+
+        {{- with .Params.tags }}
+        <p class="article-footer__label">Tagged</p>
+        <div class="article-header__tags" style="margin-bottom: var(--space-8);">
+          {{- range . }}
+          <a href="/tags/{{ . | urlize }}/" class="tag">#{{ . }}</a>
+          {{- end }}
+        </div>
+        {{- end }}
+
+        {{- with .Params.series }}
+        {{- $seriesName := index . 0 -}}
+        {{- $seriesPages := index site.Taxonomies.series ($seriesName | lower) -}}
+        {{- if $seriesPages }}
+        <p class="article-footer__label">Part of the <strong>{{ $seriesName }}</strong> series</p>
+        <div class="series-nav" style="display: flex; flex-direction: column; gap: var(--space-2);">
+          {{- range $seriesPages.Pages }}
+          <a
+            href="{{ .RelPermalink }}"
+            class="series-nav__item{{ if eq .RelPermalink $.RelPermalink }} series-nav__item--current{{ end }}"
+          >{{ .Title }}</a>
+          {{- end }}
+        </div>
+        {{- end }}
+        {{- end }}
+
+      </footer>
+    </div>
+
+  </div>
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+{{- $tocJS := resources.Get "js/toc.js" | resources.Minify | resources.Fingerprint -}}
+<script src="{{ $tocJS.RelPermalink }}" integrity="{{ $tocJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+{{ end }}

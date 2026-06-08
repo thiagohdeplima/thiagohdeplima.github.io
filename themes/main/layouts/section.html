@@ -1,0 +1,26 @@
+{{ define "main" }}
+{{- $paginator := .Paginate .Pages }}
+<div class="list-wrap">
+
+  <header class="list-header">
+    <p class="list-header__eyebrow">{{ .Section | title }}</p>
+    <h1 class="list-header__title">{{ .Title }}</h1>
+    {{- with .Description }}
+    <p class="list-header__description">{{ . }}</p>
+    {{- end }}
+    <p class="list-header__count">
+      {{ len .Pages }}{{ if eq (len .Pages) 1 }} article{{ else }} articles{{ end }}
+    </p>
+  </header>
+
+  <div class="list-posts">
+    <div class="post-list">
+      {{- range $paginator.Pages }}
+      {{ partial "post-row.html" . }}
+      {{- end }}
+    </div>
+    {{ partial "pagination.html" (dict "Paginator" $paginator) }}
+  </div>
+
+</div>
+{{ end }}

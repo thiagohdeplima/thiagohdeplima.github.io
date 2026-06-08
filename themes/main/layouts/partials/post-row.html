@@ -1,0 +1,23 @@
+{{/* Post row — compact list item for Latest section */}}
+<article class="post-row">
+
+  <div class="post-row__meta">
+    <time class="post-row__date" datetime="{{ .Date.Format "2006-01-02" }}">
+      {{- .Date.Format "Jan 2006" -}}
+    </time>
+    {{- with .Params.categories }}
+    <span class="post-row__category">{{ index . 0 }}</span>
+    {{- end }}
+  </div>
+
+  <div class="post-row__body">
+    <h3 class="post-row__title">
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </h3>
+    <p class="post-row__excerpt">{{ .Summary | plainify | truncate 180 }}</p>
+    {{- with .ReadingTime }}
+    <p class="post-row__reading-time">{{ . }} min read</p>
+    {{- end }}
+  </div>
+
+</article>

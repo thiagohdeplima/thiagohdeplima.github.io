@@ -1,0 +1,68 @@
+{{/*
+  Pagination — renders previous/next + numbered page links.
+  Call with: {{ partial "pagination.html" (dict "Paginator" $paginator) }}
+  where $paginator is the result of .Paginate .Pages in the caller.
+*/}}
+{{- $p := .Paginator -}}
+{{- if gt $p.TotalPages 1 }}
+<nav class="pagination" aria-label="Page navigation">
+
+  {{/* Previous */}}
+  {{- if $p.HasPrev }}
+  <a class="pagination__item pagination__prev" href="{{ $p.Prev.URL }}" aria-label="Previous page">
+    ← Previous
+  </a>
+  {{- else }}
+  <span class="pagination__item pagination__prev pagination__item--disabled" aria-hidden="true">
+    ← Previous
+  </span>
+  {{- end }}
+
+  {{/* Page numbers — show first, last, current ± 1, with ellipsis */}}
+  {{- $current := $p.PageNumber -}}
+  {{- $total   := $p.TotalPages -}}
+
+  {{- range $p.Pagers }}
+  {{- $n := .PageNumber }}
+
+  {{- if or
+    (eq $n 1)
+    (eq $n $total)
+    (and (ge $n (sub $current 1)) (le $n (add $current 1)))
+  }}
+    {{/* Show ellipsis before this number if there's a gap */}}
+    {{- if and (gt $n 1) (gt $n (add (sub $current 1) 1)) (not (eq $n $total)) }}
+      {{- if gt (sub $n (add $current 1)) 0 }}
+    <span class="pagination__ellipsis" aria-hidden="true">…</span>
+      {{- end }}
+    {{- end }}
+
+    {{- if eq $n $current }}
+    <span class="pagination__item pagination__item--number pagination__item--active" aria-current="page">{{ $n }}</span>
+    {{- else }}
+    <a class="pagination__item pagination__item--number" href="{{ .URL }}" aria-label="Page {{ $n }}">{{ $n }}</a>
+    {{- end }}
+
+    {{/* Show ellipsis after this number if there's a gap toward the end */}}
+    {{- if and (lt $n $total) (lt $n (sub $current 1)) }}
+      {{- if gt (sub (sub $current 1) $n) 0 }}
+    <span class="pagination__ellipsis" aria-hidden="true">…</span>
+      {{- end }}
+    {{- end }}
+
+  {{- end }}
+  {{- end }}
+
+  {{/* Next */}}
+  {{- if $p.HasNext }}
+  <a class="pagination__item pagination__next" href="{{ $p.Next.URL }}" aria-label="Next page">
+    Next →
+  </a>
+  {{- else }}
+  <span class="pagination__item pagination__next pagination__item--disabled" aria-hidden="true">
+    Next →
+  </span>
+  {{- end }}
+
+</nav>
+{{- end }}

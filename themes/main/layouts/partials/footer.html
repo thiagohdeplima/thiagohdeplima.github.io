@@ -1,0 +1,59 @@
+<div class="footer">
+
+  <div class="footer__grid">
+
+    {{/* ---- Brand ---- */}}
+    <div class="footer__brand">
+      <p class="footer__brand-name">{{ site.Title }}</p>
+      <p class="footer__brand-desc">
+        {{- site.Params.description | default "Engineering research on distributed systems, machine learning, and infrastructure." -}}
+      </p>
+    </div>
+
+    {{/* ---- Writing ---- */}}
+    <div class="footer__col">
+      <p class="footer__col-title">Writing</p>
+      <ul class="footer__links" role="list">
+        <li><a href="/posts/"  class="footer__link">All Articles</a></li>
+        <li><a href="/series/" class="footer__link">Series</a></li>
+        <li><a href="/tags/"   class="footer__link">Tags</a></li>
+      </ul>
+    </div>
+
+    {{/* ---- Site ---- */}}
+    <div class="footer__col">
+      <p class="footer__col-title">Site</p>
+      <ul class="footer__links" role="list">
+        <li><a href="/search/"  class="footer__link">Search</a></li>
+        <li><a href="{{ absURL "index.xml" }}" class="footer__link">RSS Feed</a></li>
+        <li><a href="/sitemap.xml" class="footer__link">Sitemap</a></li>
+      </ul>
+    </div>
+
+    {{/* ---- Social ---- */}}
+    {{- with site.Params.social }}
+    <div class="footer__col">
+      <p class="footer__col-title">Find me</p>
+      <ul class="footer__links" role="list">
+        {{- with .github   }}<li><a href="https://github.com/{{ . }}"             class="footer__link" target="_blank" rel="noopener noreferrer">GitHub</a></li>{{   end }}
+        {{- with .twitter  }}<li><a href="https://twitter.com/{{ . }}"            class="footer__link" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>{{ end }}
+        {{- with .linkedin }}<li><a href="https://linkedin.com/in/{{ . }}"        class="footer__link" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>{{   end }}
+      </ul>
+    </div>
+    {{- end }}
+
+  </div>
+
+  <div class="footer__bottom">
+    <p class="footer__copyright">
+      &copy; {{ now.Format "2006" }} {{ site.Title }}. Built with
+      <a href="https://gohugo.io" class="footer__link" target="_blank" rel="noopener noreferrer">Hugo</a>.
+    </p>
+    <div class="footer__social">
+      {{- with site.Params.social.github }}
+      <a href="https://github.com/{{ . }}" class="footer__social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+      {{- end }}
+    </div>
+  </div>
+
+</div>

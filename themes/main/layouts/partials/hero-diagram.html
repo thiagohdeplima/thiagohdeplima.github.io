@@ -1,0 +1,78 @@
+{{/*
+  Event pipeline architecture diagram.
+  Inline SVG so CSS custom properties (dark mode tokens) work directly.
+  All class names prefixed hd- to avoid collisions.
+*/}}
+<svg
+  class="hero__diagram"
+  viewBox="0 0 480 256"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    {{/* Dot grid pattern — subtle background texture */}}
+    <pattern id="hd-dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.9" class="hd-dot-grid"/>
+    </pattern>
+    {{/* Arrowhead marker */}}
+    <marker id="hd-arrow" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M 0 1 L 5 3.5 L 0 6 Z" class="hd-arrowhead"/>
+    </marker>
+  </defs>
+
+  {{/* Background dot grid */}}
+  <rect width="480" height="256" fill="url(#hd-dots)"/>
+
+  {{/* ── Sources (left) ─────────────────────── */}}
+  <rect x="12" y="38"  width="76" height="28" rx="4" class="hd-node"/>
+  <text x="50" y="57"  text-anchor="middle" class="hd-label">API</text>
+
+  <rect x="12" y="114" width="76" height="28" rx="4" class="hd-node"/>
+  <text x="50" y="133" text-anchor="middle" class="hd-label">Events</text>
+
+  <rect x="12" y="190" width="76" height="28" rx="4" class="hd-node"/>
+  <text x="50" y="209" text-anchor="middle" class="hd-label">Batch</text>
+
+  {{/* ── Fan-in lines: sources → stream ──────── */}}
+  <path d="M 88 52  C 118 52,  146 128, 166 128" class="hd-line" marker-end="url(#hd-arrow)"/>
+  <path d="M 88 128 L 164 128"                    class="hd-line" marker-end="url(#hd-arrow)"/>
+  <path d="M 88 204 C 118 204, 146 128, 166 128"  class="hd-line" marker-end="url(#hd-arrow)"/>
+
+  {{/* ── Event Stream (partition queue) ─────── */}}
+  <rect x="170" y="74" width="38" height="108" rx="4" class="hd-stream"/>
+  {{/* Partition dividers */}}
+  <line x1="170" y1="101" x2="208" y2="101" class="hd-partition"/>
+  <line x1="170" y1="128" x2="208" y2="128" class="hd-partition"/>
+  <line x1="170" y1="155" x2="208" y2="155" class="hd-partition"/>
+  <text x="189" y="68" text-anchor="middle" class="hd-caption">stream</text>
+
+  {{/* ── Stream → Processor ────────────────── */}}
+  <path d="M 208 128 L 248 128" class="hd-line" marker-end="url(#hd-arrow)"/>
+
+  {{/* ── Processor node ────────────────────── */}}
+  <rect x="252" y="99" width="84" height="58" rx="6" class="hd-node"/>
+  <text x="294" y="125" text-anchor="middle" class="hd-label">Processor</text>
+  <text x="294" y="143" text-anchor="middle" class="hd-sublabel">× 3 workers</text>
+
+  {{/* ── Fan-out lines: processor → consumers ─ */}}
+  <path d="M 336 117 C 358 117, 358 52,  382 52"  class="hd-line" marker-end="url(#hd-arrow)"/>
+  <path d="M 336 128 L 380 128"                    class="hd-line" marker-end="url(#hd-arrow)"/>
+  <path d="M 336 139 C 358 139, 358 204, 382 204"  class="hd-line" marker-end="url(#hd-arrow)"/>
+
+  {{/* ── Consumers (right) ───────────────────── */}}
+  <rect x="384" y="38"  width="84" height="28" rx="4" class="hd-node"/>
+  <text x="426" y="57"  text-anchor="middle" class="hd-label">Analytics</text>
+
+  <rect x="384" y="114" width="84" height="28" rx="4" class="hd-node"/>
+  <text x="426" y="133" text-anchor="middle" class="hd-label">Storage</text>
+
+  <rect x="384" y="190" width="84" height="28" rx="4" class="hd-node"/>
+  <text x="426" y="209" text-anchor="middle" class="hd-label">Notify</text>
+
+  {{/* ── Data-in-flight indicators ────────────── */}}
+  <circle cx="132" cy="78"  r="3" class="hd-data"/>
+  <circle cx="228" cy="128" r="3" class="hd-data"/>
+  <circle cx="362" cy="78"  r="3" class="hd-data"/>
+</svg>

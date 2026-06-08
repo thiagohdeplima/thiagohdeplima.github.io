@@ -1,0 +1,38 @@
+{{/*
+  Generic callout shortcode.
+  Usage (renders inner content as Markdown — use {% %} delimiters):
+    {{% callout type="warning" title="Watch out" %}}
+    Content here with **markdown**.
+    {{% /callout %}}
+
+  Parameters:
+    type  (string): "info" | "warning" | "tip" | "caution"  (default: "info")
+    title (string): heading label. Defaults to the type name capitalised.
+*/}}
+{{- $type  := .Get "type"  | default (.Get 0) | default "info" | lower -}}
+{{- $valid := slice "info" "warning" "tip" "caution" -}}
+{{- if not (in $valid $type) }}{{- $type = "info" -}}{{- end -}}
+
+{{- $defaultTitles := dict
+    "info"    "Info"
+    "warning" "Warning"
+    "tip"     "Tip"
+    "caution" "Caution"
+-}}
+{{- $title := .Get "title" | default (index $defaultTitles $type) -}}
+
+{{/* SVG icons — one per type, 20×20, uses currentColor */}}
+{{- $icons := dict
+    "info" `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="8.5"/><line x1="10" y1="9" x2="10" y2="14"/><circle cx="10" cy="6.5" r="0.75" fill="currentColor" stroke="none"/></svg>`
+    "warning" `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2.5L18 17H2L10 2.5Z"/><line x1="10" y1="8.5" x2="10" y2="12"/><circle cx="10" cy="14.5" r="0.75" fill="currentColor" stroke="none"/></svg>`
+    "tip" `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 17H7"/><path d="M7.5 14c0-3-3.5-4.5-3.5-8a6 6 0 1112 0c0 3.5-3.5 5-3.5 8H7.5z"/><line x1="10" y1="1.5" x2="10" y2="3"/></svg>`
+    "caution" `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="8.5"/><line x1="7" y1="7" x2="13" y2="13"/><line x1="13" y1="7" x2="7" y2="13"/></svg>`
+-}}
+
+<div class="callout callout--{{ $type }}" role="note" aria-label="{{ $title }}">
+  <div class="callout__icon">{{ index $icons $type | safeHTML }}</div>
+  <div class="callout__body">
+    <p class="callout__title">{{ $title }}</p>
+    <div class="callout__content">{{ .Inner | markdownify }}</div>
+  </div>
+</div>

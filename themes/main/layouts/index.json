@@ -1,0 +1,20 @@
+{{- /*
+  Search index — output as JSON, consumed by Fuse.js on /search/.
+  Only regular posts in the "posts" section are indexed.
+  Hugo emits this as /index.json when the home output includes JSON.
+*/ -}}
+{{- $index := slice -}}
+{{- range where site.RegularPages "Section" "posts" -}}
+  {{- $entry := dict
+      "title"       .Title
+      "description" (.Description | default .Summary | plainify | truncate 220)
+      "url"         .RelPermalink
+      "date"        (.Date.Format "Jan 2006")
+      "tags"        (.Params.tags       | default slice)
+      "categories"  (.Params.categories | default slice)
+      "series"      (.Params.series     | default slice)
+      "readingTime" .ReadingTime
+  -}}
+  {{- $index = $index | append $entry -}}
+{{- end -}}
+{{- $index | jsonify -}}

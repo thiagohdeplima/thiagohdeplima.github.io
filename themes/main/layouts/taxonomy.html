@@ -1,0 +1,57 @@
+{{ define "main" }}
+{{/*
+  Taxonomy index — renders all terms for a given taxonomy.
+  .Data.Singular identifies the type (tag, category, series).
+  Series gets rich description cards; tags/categories get a chip cloud.
+*/}}
+{{- $taxon := .Data.Singular }}
+<div class="taxonomy-wrap">
+
+  <header class="list-header">
+    <p class="list-header__eyebrow">Browse by</p>
+    <h1 class="list-header__title">{{ .Title }}</h1>
+    {{- with .Description }}
+    <p class="list-header__description">{{ . }}</p>
+    {{- end }}
+    <p class="list-header__count">
+      {{ len .Data.Terms }}{{ if eq (len .Data.Terms) 1 }} {{ $taxon }}{{ else }} {{ .Data.Plural }}{{ end }}
+    </p>
+  </header>
+
+  {{- if eq $taxon "series" }}
+  {{/* ---- Series: rich description cards ---- */}}
+  <div class="series-grid">
+    {{- range $name, $pages := .Data.Terms }}
+    {{- $termPage := site.GetPage (printf "/%s/%s" $.Data.Plural ($name | urlize)) -}}
+    <a
+      href="{{ if $termPage }}{{ $termPage.RelPermalink }}{{ else }}/{{ $.Data.Plural }}/{{ $name | urlize }}/{{ end }}"
+      class="series-card"
+    >
+      <h2 class="series-card__name">
+        {{- if $termPage }}{{ $termPage.Title }}{{ else }}{{ $name | title }}{{ end -}}
+      </h2>
+      {{- if $termPage }}{{- with $termPage.Description }}
+      <p class="series-card__desc">{{ . }}</p>
+      {{- end }}{{- end }}
+      <p class="series-card__footer">
+        {{ len $pages }}{{ if eq (len $pages) 1 }} article{{ else }} articles{{ end }}
+      </p>
+    </a>
+    {{- end }}
+  </div>
+
+  {{- else }}
+  {{/* ---- Tags / Categories: compact chip cloud ---- */}}
+  <div class="term-cloud">
+    {{- range .Data.Terms.Alphabetical }}
+    <a href="{{ .Page.RelPermalink }}" class="term-chip">
+      {{ .Page.Title }}
+      <span class="term-chip__count">{{ .Count }}</span>
+    </a>
+    {{- end }}
+  </div>
+
+  {{- end }}
+
+</div>
+{{ end }}

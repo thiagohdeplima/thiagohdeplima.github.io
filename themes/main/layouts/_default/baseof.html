@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html
+  lang="{{ .Language.Lang | default "en" }}"
+  dir="{{ or site.Language.Direction "ltr" }}"
+  data-theme="light"
+>
+<head>
+  <meta charset="UTF-8">
+  {{/* Inline theme detection before first paint — prevents flash of incorrect theme */}}
+  <script>(function(){var s;try{s=localStorage.getItem('theme')}catch(e){}if(!s){s=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',s);}());</script>
+
+  {{ partial "head/meta.html"  . }}
+  {{ partial "head/fonts.html" . }}
+  {{ partial "head/seo.html"   . }}
+
+  {{- if or .Params.math site.Params.math }}
+  {{ partial "head/math.html" . }}
+  {{- end }}
+
+  {{- $cssFiles := slice
+    (resources.Get "css/base/_tokens.css")
+    (resources.Get "css/base/_reset.css")
+    (resources.Get "css/base/_typography.css")
+    (resources.Get "css/components/_nav.css")
+    (resources.Get "css/components/_hero.css")
+    (resources.Get "css/components/_card.css")
+    (resources.Get "css/components/_toc.css")
+    (resources.Get "css/components/_code.css")
+    (resources.Get "css/components/_math.css")
+    (resources.Get "css/components/_callout.css")
+    (resources.Get "css/components/_search.css")
+    (resources.Get "css/components/_pagination.css")
+    (resources.Get "css/components/_footer.css")
+    (resources.Get "css/layouts/_home.css")
+    (resources.Get "css/layouts/_article.css")
+    (resources.Get "css/layouts/_list.css")
+    (resources.Get "css/chroma/_light.css")
+    (resources.Get "css/chroma/_dark.css")
+    (resources.Get "css/dark/_dark.css")
+  -}}
+  {{- $css := $cssFiles | resources.Concat "css/main.css" | resources.Minify | resources.Fingerprint -}}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+
+  {{ block "head-extra" . }}{{ end }}
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    {{ partial "nav.html" . }}
+  </header>
+
+  <main id="main-content">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    {{ partial "footer.html" . }}
+  </footer>
+
+  {{- $themeJS   := resources.Get "js/theme.js"     | resources.Minify | resources.Fingerprint -}}
+  {{- $copyJS    := resources.Get "js/copy-code.js" | resources.Minify | resources.Fingerprint -}}
+  <script src="{{ $themeJS.RelPermalink }}"  integrity="{{ $themeJS.Data.Integrity }}"  crossorigin="anonymous" defer></script>
+  <script src="{{ $copyJS.RelPermalink }}"   integrity="{{ $copyJS.Data.Integrity }}"   crossorigin="anonymous" defer></script>
+
+  {{ block "scripts" . }}{{ end }}
+</body>
+</html>

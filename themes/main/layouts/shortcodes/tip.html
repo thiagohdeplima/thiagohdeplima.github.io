@@ -1,0 +1,8 @@
+{{- $title := .Get "title" | default "Tip" -}}
+<div class="callout callout--tip" role="note" aria-label="{{ $title }}">
+  <div class="callout__icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 17H7"/><path d="M7.5 14c0-3-3.5-4.5-3.5-8a6 6 0 1112 0c0 3.5-3.5 5-3.5 8H7.5z"/><line x1="10" y1="1.5" x2="10" y2="3"/></svg></div>
+  <div class="callout__body">
+    <p class="callout__title">{{ $title }}</p>
+    <div class="callout__content">{{ .Inner | markdownify }}</div>
+  </div>
+</div>

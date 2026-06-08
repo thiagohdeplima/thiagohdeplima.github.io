@@ -1,0 +1,93 @@
+/* =============================================================
+   Pagination — previous / next + numbered page links
+   ============================================================= */
+
+.pagination {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             var(--space-1);
+  padding:         var(--space-12) 0 var(--space-8);
+  flex-wrap:       wrap;
+}
+
+/* ---- Shared button base ---- */
+
+.pagination__item {
+  display:          inline-flex;
+  align-items:      center;
+  justify-content:  center;
+  min-width:        36px;
+  height:           36px;
+  padding:          0 var(--space-3);
+  font-family:      var(--font-body);
+  font-size:        var(--text-sm);
+  font-weight:      var(--weight-medium);
+  color:            var(--color-text-secondary);
+  background:       transparent;
+  border:           1px solid transparent;
+  border-radius:    var(--radius-md);
+  text-decoration:  none;
+  cursor:           pointer;
+  transition:
+    color            var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color     var(--transition-fast);
+  line-height:      1;
+  white-space:      nowrap;
+}
+
+.pagination__item:hover {
+  color:            var(--color-text-primary);
+  background-color: var(--color-bg-subtle);
+  border-color:     var(--color-border);
+}
+
+/* Active / current page */
+.pagination__item--active {
+  color:            var(--color-accent);
+  background-color: var(--color-accent-subtle);
+  border-color:     var(--color-accent);
+  pointer-events:   none;
+  font-weight:      var(--weight-semibold);
+}
+
+/* Prev / Next — slightly wider */
+.pagination__prev,
+.pagination__next {
+  gap: var(--space-1);
+}
+
+/* Disabled state (first page has no prev; last page has no next) */
+.pagination__item--disabled {
+  color:          var(--color-text-muted);
+  pointer-events: none;
+  opacity:        0.5;
+}
+
+/* Ellipsis separator */
+.pagination__ellipsis {
+  display:     inline-flex;
+  align-items: center;
+  padding:     0 var(--space-2);
+  color:       var(--color-text-muted);
+  font-size:   var(--text-sm);
+  user-select: none;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 480px) {
+  /* Hide numbered pages on very small screens — keep prev/next only */
+  .pagination__item--number {
+    display: none;
+  }
+
+  .pagination__item--active {
+    display: inline-flex; /* always show current page */
+  }
+
+  .pagination__ellipsis {
+    display: none;
+  }
+}

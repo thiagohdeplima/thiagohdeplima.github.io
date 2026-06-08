@@ -1,0 +1,11 @@
+{{/*
+  Hugo's .TableOfContents already outputs a nested <nav><ul><li><a> structure.
+  We render it directly and target its elements with CSS using the
+  .toc-content wrapper class.
+
+  The JS scroll-spy adds/removes .is-active on the <li> elements
+  by matching href="#<id>" against the headings' IDs.
+*/}}
+<div class="toc-content">
+  {{ .toc }}
+</div>

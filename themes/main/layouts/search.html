@@ -1,0 +1,46 @@
+{{ define "head-extra" }}
+{{/*
+  Fuse.js — loaded only on the search page via head-extra block.
+  Must come before search.js (which is in the scripts block at body end).
+  Deferred scripts execute in document order, so this fires first.
+*/}}
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js" defer crossorigin="anonymous"></script>
+{{ end }}
+
+{{ define "main" }}
+<div class="search-wrap">
+
+  <header class="list-header">
+    <p class="list-header__eyebrow">Site Search</p>
+    <h1 class="list-header__title">Search</h1>
+    <p class="list-header__description">
+      Search titles, descriptions, and tags across all articles.
+    </p>
+  </header>
+
+  <div class="search-field">
+    <input
+      id="search-input"
+      type="search"
+      class="search-input"
+      placeholder="Loading index…"
+      disabled
+      aria-label="Search articles"
+      aria-controls="search-results"
+      autocomplete="off"
+      spellcheck="false"
+    >
+  </div>
+
+  <p class="search-status" id="search-status" aria-live="polite" aria-atomic="true"></p>
+
+  <div class="post-list" id="search-results" role="list" aria-label="Search results"></div>
+
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+{{- $searchJS := resources.Get "js/search.js" | resources.Minify | resources.Fingerprint -}}
+<script src="{{ $searchJS.RelPermalink }}" integrity="{{ $searchJS.Data.Integrity }}" crossorigin="anonymous" defer></script>
+{{ end }}

@@ -1,0 +1,207 @@
+/* =============================================================
+   Hero — homepage top section with CTA and SVG illustration
+   ============================================================= */
+
+.hero {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero__inner {
+  max-width:   var(--content-width-wide);
+  margin:      0 auto;
+  padding:     var(--space-20) var(--space-6) var(--space-24);
+  display:     grid;
+  grid-template-columns: 1fr 1fr;
+  gap:         var(--space-16);
+  align-items: center;
+}
+
+/* ---- Text side ---- */
+
+.hero__eyebrow {
+  font-family:    var(--font-body);
+  font-size:      var(--text-xs);
+  font-weight:    var(--weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color:          var(--color-accent);
+  margin-bottom:  var(--space-4);
+}
+
+.hero__title {
+  font-family:    var(--font-heading);
+  font-size:      clamp(2rem, 4.5vw, 2.75rem);
+  font-weight:    var(--weight-bold);
+  color:          var(--color-text-primary);
+  letter-spacing: var(--tracking-tight);
+  line-height:    var(--leading-tight);
+  margin-bottom:  var(--space-6);
+}
+
+.hero__description {
+  font-size:     var(--text-lg);
+  color:         var(--color-text-secondary);
+  line-height:   var(--leading-relaxed);
+  max-width:     460px;
+  margin-bottom: var(--space-8);
+}
+
+.hero__actions {
+  display:     flex;
+  align-items: center;
+  gap:         var(--space-3);
+  flex-wrap:   wrap;
+}
+
+/* ---- Illustration side ---- */
+
+.hero__diagram-wrap {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+}
+
+.hero__diagram {
+  width:     100%;
+  max-width: 500px;
+  height:    auto;
+}
+
+/* ---- SVG diagram classes (inline SVG, inherits CSS vars) ---- */
+
+.hd-node {
+  fill:         rgb(15 76 92 / 0.07);
+  stroke:       var(--color-accent);
+  stroke-width: 1.5;
+}
+
+.hd-stream {
+  fill:         rgb(15 76 92 / 0.12);
+  stroke:       var(--color-accent);
+  stroke-width: 1.5;
+}
+
+.hd-partition {
+  stroke:       var(--color-accent);
+  stroke-width: 0.75;
+  opacity:      0.35;
+}
+
+.hd-line {
+  stroke:       var(--color-text-muted);
+  stroke-width: 1.5;
+}
+
+.hd-arrowhead {
+  fill: var(--color-text-muted);
+}
+
+.hd-label {
+  font-family:    var(--font-code);
+  font-size:      10.5px;
+  font-weight:    500;
+  fill:           var(--color-accent);
+  letter-spacing: 0.02em;
+}
+
+.hd-sublabel {
+  font-family: var(--font-body);
+  font-size:   9.5px;
+  fill:        var(--color-text-tertiary);
+}
+
+.hd-caption {
+  font-family:    var(--font-body);
+  font-size:      9px;
+  font-weight:    500;
+  fill:           var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hd-data {
+  fill:    var(--color-accent);
+  opacity: 0.55;
+}
+
+.hd-dot-grid {
+  fill:    var(--color-text-primary);
+  opacity: 0.07;
+}
+
+/* Dark mode overrides for SVG — since it's inline, CSS vars handle most of it */
+[data-theme="dark"] .hd-node   { fill: rgb(56 189 248 / 0.07);  }
+[data-theme="dark"] .hd-stream { fill: rgb(56 189 248 / 0.12);  }
+
+/* ---- Buttons ---- */
+
+.btn {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             var(--space-2);
+  padding:         var(--space-3) var(--space-6);
+  border-radius:   var(--radius-md);
+  font-family:     var(--font-body);
+  font-size:       var(--text-sm);
+  font-weight:     var(--weight-medium);
+  text-decoration: none;
+  cursor:          pointer;
+  border:          1px solid transparent;
+  transition:
+    background-color var(--transition-fast),
+    color            var(--transition-fast),
+    border-color     var(--transition-fast);
+  line-height:     1;
+  white-space:     nowrap;
+}
+
+.btn--primary {
+  background-color: var(--color-accent);
+  color:            #fff;
+  border-color:     var(--color-accent);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-accent-2);
+  border-color:     var(--color-accent-2);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  color:            var(--color-text-secondary);
+  border-color:     var(--color-border);
+}
+
+.btn--ghost:hover {
+  background-color: var(--color-bg-subtle);
+  color:            var(--color-text-primary);
+  border-color:     var(--color-text-muted);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 960px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap:     var(--space-12);
+    padding: var(--space-16) var(--space-6) var(--space-20);
+  }
+
+  .hero__diagram-wrap {
+    display: none;
+  }
+
+  .hero__title {
+    font-size: clamp(1.875rem, 6vw, 2.5rem);
+  }
+
+  .hero__description {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__inner {
+    padding: var(--space-12) var(--space-4) var(--space-16);
+  }
+}
