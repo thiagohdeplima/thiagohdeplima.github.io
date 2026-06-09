@@ -1,6 +1,6 @@
-baseURL: 'https://thiagohdeplima.github.io/'
+baseURL: "https://thiagohdeplima.github.io/"
 locale: en-us
-title: Thiago Lima
+title: Thiago Henrique
 theme: main
 
 enableRobotsTXT: true
@@ -22,10 +22,10 @@ markup:
         enable: true
         delimiters:
           block:
-            - ['$$', '$$']
+            - ["$$", "$$"]
             - ['\[', '\]']
           inline:
-            - ['$', '$']
+            - ["$", "$"]
             - ['\(', '\)']
   tableOfContents:
     startLevel: 2
@@ -38,14 +38,14 @@ taxonomies:
   series: series
 
 params:
-  description: 'Engineering research on distributed systems, machine learning, and infrastructure.'
-  author: Thiago Lima
+  description: "Engineering research on distributed systems, machine learning, and infrastructure."
+  author: Thiago Henrique
   ogLocale: en_US
   math: false
   social:
     github: thiagohdeplima
-    twitter: ''
-    linkedin: ''
+    twitter: ""
+    linkedin: ""
 
 outputs:
   home:
